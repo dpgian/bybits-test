@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# De Palma By Bits Code Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and styled with [Bulma](https://bulma.io/). Navigation has been implemented with [Reach Router](https://reach.tech/router/)
 
-## Available Scripts
+## Time estimate
 
-In the project directory, you can run:
+This project 1:45 hours + 30 minutes
+- [45min] Environment setup, login form page
+- [40min] Mock details page, navigation, wired API fetchs
+- [20min] Project completion
 
-### `npm start`
+- [30min] Extra time for bugtesting and side notes
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Please check Project Notes to see my line of thoughts.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Design Notes
 
-### `npm test`
+I wanted to keep a very simple design to avoid any user confusion. I took inspiration from the ByBits login page and implemented a userface similar to the user story provided. Bulma was offering everything I needed, an easy to read, clean and responsive design.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Sign In](https://i.ibb.co/rwknNNP/Capture1.jpg)
+![Details](https://i.ibb.co/v40B1V8/Capture2.jpg)
 
-### `npm run build`
+## Project Notes
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Examined mock API using Postman to have a better understanding of it.
+- Creation of Login Form Page 
+    > I wanted to implement data validation as I tough every login page should always have one.
+    I kept a simple data validation that can be easily reused in case we need to check emails or any other data
+- Creation of Details Page with dummy data
+    > I reused the interface from the Login Page to setup a simple Details page with some mock data that eventually I swapped for the data retrieved from the API
+- Implemented Navigation with Reach Router
+- Implemented Fetch of API data
+    > The navigation between the login and details page happens only if we have no errors in authentication. To make the second call using `access_token` I had to store the value somewhere. As I think that is *sensitive data I did not want to store it in local storage*
+    > I have never used useContext but I tough it would have been a better option and an extra challenge for me. 
+- Implemented useContext to store user data 
+    > Having a context will allow to manage the user data in various part of the application. In this case, we only needed them for one page so a useState could have been optimal as well, but I set that as a challenge
+    > I considered the `access_token` as part of the userData and it does not get lost at any time
+    > No details are displayed until the fetch is complete. If we have no data to display a loading will appear. To test this change line 43 on Details.js
+- Implemented log out
+    > Loggin out we lose all the user data and we get back to the login page
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Testing and side notes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+No tests have been submitted as I have no experience in writing good effective ones.
+I tend to console log a lot of data whenever I code. Those logs have been removed for this submission to clean up the code. This also lead me to realise that this app is not optimized as I wanted it to be. 
+The 30 minutes extra I took was to fix the details page. It might be something to do with the context and I couldn't find a solution to it; I would have opened a ticket on stackoverflow but I decided not to as I tought it would be 'cheating'.
+Once we are logged in, if we refresh the page the data is kept.
+If we log out and use the browser arrow back we are still displayed the user data, when we should not; the user data however is not in the context as this is empty. 
+As I solution instead of keeping the loading flag I tought I could use the access_token as a flag, but then realised we might run into an issue on the second call and went back on my steps.
 
-### `npm run eject`
+## Conclusion
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Thank you for considering me for the challenge and looking forward to have your feedback
